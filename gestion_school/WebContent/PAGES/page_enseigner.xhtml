@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+	
+			
+			<ui:define name="body">
+				<div class="logo">
+    <img src="images/classe.jpg" class="avatar" alt="" /> 
+    	   
+        <h1>Assignation de classe</h1>
+	<h:form id="form">
+	<h:panelGrid columns="2" id="classGrid">
+	
+	   <p:outputLabel for="id" value="Code ens" ></p:outputLabel>
+	<p:inputText id="id" value="#{enseignerBean.ens.codeEns}"></p:inputText>
+	
+	<h:outputLabel for="prof" value="Professeur"/>
+	<p:selectOneMenu id="prof" value="#{enseignerBean.choixProf}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{enseignerBean.myListProf}" var="tata" itemLabel="#{tata.nomProf}" itemValue="#{tata}"></f:selectItems>
+	</p:selectOneMenu>
+	
+	
+	<h:outputLabel for="classe" value="Classe"/>
+	<p:selectOneMenu id="classe" value="#{enseignerBean.choixClass}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{enseignerBean.myListClass}" var="tato" itemLabel="#{tato.nomClasse}" itemValue="#{tato}"></f:selectItems>
+	</p:selectOneMenu>
+		<h:outputLabel for="mat" value="Matiere"/>
+	<p:selectOneMenu id="mat" value="#{enseignerBean.choixMat}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{enseignerBean.myListMat}" var="tati" itemLabel="#{tati.libelleMatiere}" itemValue="#{tati}"></f:selectItems>
+	</p:selectOneMenu>
+	</h:panelGrid>
+	
+   <h:panelGrid style="margin-top:30px" columns="3">
+	<p:commandButton value="Valider" action="#{enseignerBean.inscrire}"></p:commandButton>
+   </h:panelGrid>
+	</h:form>
+	</div>	
+	
+				
+			</ui:define>
+	</ui:composition>
+
+</html>
+

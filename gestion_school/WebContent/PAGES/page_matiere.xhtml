@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+	
+			
+			<ui:define name="body" >
+		<div class="logo" style="    width: 320px;
+    height: 400px;
+    background:#000;
+    color: #fff;
+    top: 50%;
+    left: 30%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 10px;">
+    <img src="images/livre.jpg" class="avatar" style="    width: 100px;
+    height: 1OOpx;
+    border-radius: 50%;
+    position: absolute;
+    top:-50px;
+    left:33%;" alt="" /> 
+    	   
+        <h1 style=" margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 30px;">Ajouter Matière</h1>
+	<h:form id="form">
+	<h:panelGrid id="matiereGrid" style="">
+
+            
+       <p style="margin: 0;
+    padding: 0;
+    font-weight: bold;">Code matière</p>
+	<p:inputText style="    width: 100%;
+    margin-bottom: 20px;" type="text" id="code" placeholder="Entrez code matière" value="#{matiereBean.mat.codeMatiere}"></p:inputText>
+	
+		<p style="margin: 0;
+    padding: 0;
+    font-weight: bold;">Nom matière</p>
+	<p:inputText style="    width: 100%;
+    margin-bottom: 20px;" type="text" id="lib" placeholder="Entrez le nom" value="#{matiereBean.mat.libelleMatiere}"></p:inputText>
+	</h:panelGrid>
+	<h:panelGrid columns="3">
+    <p:commandButton style="border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 20px;" value="Valider" binding="#{matiereBean.submit}" action="#{matiereBean.inscrire}" update="form,table, messages"></p:commandButton>
+   <p:commandButton style="border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 20px;" value="Modifier" binding="#{matiereBean.up}" action="#{matiereBean.modifier}" update="form ,table, messages"></p:commandButton>
+	
+	</h:panelGrid>
+	<p:messages id="messages" showDetail="true" closable="true">
+       
+    </p:messages>
+	<div class="data" style="left:100%;
+	position: absolute;
+	bottom:50%;
+	top:0;
+	width: 500px;
+	margin-left:30px;">
+		<p:dataTable id="table" var="rara" value="#{matiereBean.tabMatiere}" selectionMode="single" selection="#{matiereBean.matSelected}" rowKey="#{rara.codeMatiere}">
+	<f:facet name="header">LISTE DES MATIERES</f:facet>
+	<p:ajax event="rowSelect" listener="#{matiereBean.onChange}" update="form:matiereGrid" />
+	<p:column headerText="Code de Matiere" width="20%">#{rara.codeMatiere}</p:column>
+	<p:column headerText="NOM de matiere" width="50%">#{rara.libelleMatiere}</p:column>
+	</p:dataTable>
+	</div>
+	</h:form>
+	</div>
+			
+			</ui:define>
+	</ui:composition>
+
+</html>
+

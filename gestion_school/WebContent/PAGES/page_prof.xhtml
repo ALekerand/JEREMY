@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+	
+			
+			<ui:define name="body">
+				<div class="logo">
+    <img src="images/prof.jpg" class="avatar" alt="" /> 
+    	   
+        <h1>Ajouter prof</h1>
+	<h:form id="form">
+	<h:panelGrid id="profGrid" columns="2">	
+		<p:outputLabel for="mat" value="Matricule"></p:outputLabel>
+	<p:inputText id="mat" value="#{profBean.prof.numProf}"></p:inputText>
+	
+		<p:outputLabel for="Nom" value="Nom" ></p:outputLabel>
+	<p:inputText id="Nom" value="#{profBean.prof.nomProf}" required="false"></p:inputText>
+	
+		<p:outputLabel value="Prenoms" ></p:outputLabel>
+	<p:inputText value="#{profBean.prof.prenomProf}" required="false"></p:inputText>
+		
+		<p:outputLabel value="Telephone" ></p:outputLabel>
+	<p:inputText value="#{profBean.prof.telProf}" required="false"></p:inputText>
+	
+	</h:panelGrid>
+	<h:panelGrid columns="2">
+	<p:commandButton value="Valider" binding="#{profBean.submit}" action="#{profBean.inscrire}" update="form , table, messages"></p:commandButton>
+    <p:commandButton value="Modifier" binding="#{profBean.up}" action="#{profBean.modifier}" update="form , table, messages"></p:commandButton>
+	
+	</h:panelGrid>
+	<p:messages id="messages" showDetail="true" closable="true">
+       
+    </p:messages>
+	<div class="data">
+			<p:dataTable id="table" var="rara" value="#{profBean.tabProf}" selectionMode="single" selection="#{profBean.profSelected}" rowKey="#{rara.numProf}">
+	<f:facet name="header">LISTE DES ETUDIANTS</f:facet>
+	<p:ajax event="rowSelect" listener="#{profBean.onChange}" update="form:profGrid" />
+	<p:column headerText="Matricule">#{rara.numProf}</p:column>
+	<p:column headerText="NOM">#{rara.nomProf}</p:column>
+		<p:column headerText="Prenom">#{rara.prenomProf}</p:column>
+	<p:column headerText="telephone">#{rara.telProf}</p:column>
+	</p:dataTable>
+	</div>
+	</h:form>
+	</div>
+				
+			</ui:define>
+	</ui:composition>
+
+</html>
+

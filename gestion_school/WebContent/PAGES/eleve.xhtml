@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Fiche d'inscription Elève</title>
+
+
+<style type="text/css">
+body
+{
+    margin: 0;
+    padding: 0;
+    background: url(images/wood.png);
+    font-family: sans-serif;
+
+}
+.logo
+{
+     width: 350px;
+    height: 650px;
+    background:#000;
+    color: #fff;
+    top: 55%;
+    left: 30%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 10px;
+}
+.data
+{ 
+	left:100%;
+	position: absolute;
+	bottom:50%;
+	top:0;
+	width: 500px;
+	margin-left:30px; 
+}
+.avatar
+{
+    width: 100px;
+    height: 1OOpx;
+    border-radius: 50%;
+    position: absolute;
+    top:-50px;
+    left:42%;
+}
+h1
+{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 30px;
+
+}
+.logo p 
+{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+
+}
+.logo input
+{
+    width: 100%;
+    margin-bottom: 20px;
+} 
+.logo input[type="text"] ,input[type="password"],input[type="number"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+
+}
+.logo Button
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fb2525;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 20px;
+}
+.logo Button
+{
+    cursor: pointer;
+    background: #ffc107;
+    color:#000;
+}
+.logo Button:hover
+{
+    background: #ccc;
+}
+        </style>
+
+</h:head>
+<h:body>
+<div class="logo">
+    <img src="images/eleve.jpg" class="avatar" alt="" /> 
+    	   
+        <h1>Ajouter un élève</h1>
+	<h:form id="form">	
+    <h:panelGrid  cellpadding="10px" columns="2" id="eleveGrid">
+		<p:outputLabel for="mat" value="Matricule"></p:outputLabel>
+	<p:inputText id="mat" value="#{eleveBean.el.numEleve}"></p:inputText>
+	
+		<p:outputLabel for="Nom" value="Nom" ></p:outputLabel>
+	<p:inputText id="Nom" value="#{eleveBean.el.nom}"></p:inputText>
+	
+		<p:outputLabel value="Prenoms" ></p:outputLabel>
+	<p:inputText value="#{eleveBean.el.prenom}"></p:inputText>
+	
+		<p:outputLabel value="Date de naissance" ></p:outputLabel>
+	<p:calendar value="#{eleveBean.el.dateNaissance}" pattern="MM/dd/yyyy"></p:calendar>
+	
+	<h:outputLabel for="classe" value="Classe"/>
+	<p:selectOneMenu id="classe" value="#{eleveBean.choixClass}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{eleveBean.myListClass}" var="tata" itemLabel="#{tata.nomClasse}" itemValue="#{tata}"></f:selectItems>
+	</p:selectOneMenu>
+	
+	</h:panelGrid>
+	<h:panelGrid style="margin-left:10%" columns="3">
+	<p:commandButton value="Valider" binding="#{eleveBean.submit}" action="#{eleveBean.inscrire}" update="form, table, messages"></p:commandButton>
+	<p:commandButton value="Modifier" binding="#{eleveBean.up}" action="#{eleveBean.modifier}" update="form , table, messages"></p:commandButton>
+	
+	
+	</h:panelGrid>
+	<p:messages id="messages" showDetail="true" closable="true">
+       
+    </p:messages>
+<div class="data">
+	<p:dataTable id="table" var="rara" value="#{eleveBean.tabEleve}" selectionMode="single" selection="#{eleveBean.eleveSelected}" rowKey="#{rara.numEleve}">
+	<f:facet name="header">LISTE DES ELEVES</f:facet>
+	<p:ajax event="rowSelect" listener="#{eleveBean.onChange}" update="form:eleveGrid" />
+	<p:column headerText="Matricule">#{rara.numEleve}</p:column>
+	<p:column headerText="NOM">#{rara.nom}</p:column>
+	<p:column headerText="Prenom">#{rara.prenom}</p:column>
+	<p:column headerText="Date de naissance">#{rara.dateNaissance}</p:column>
+	</p:dataTable>
+	</div>
+	</h:form>
+	</div>
+	
+</h:body>
+</html>

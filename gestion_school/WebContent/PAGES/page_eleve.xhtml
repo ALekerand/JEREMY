@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+	
+			
+			<ui:define name="body">
+				<div class="logo">
+    <img src="images/eleve.jpg" class="avatar" alt="" /> 
+    	   
+        <h1>Ajouter un élève</h1>
+	<h:form id="form">	
+    <h:panelGrid  cellpadding="10px" columns="2" id="eleveGrid">
+		<p:outputLabel for="mat" value="Matricule"></p:outputLabel>
+	<p:inputText id="mat" value="#{eleveBean.el.numEleve}"></p:inputText>
+	
+		<p:outputLabel for="Nom" value="Nom" ></p:outputLabel>
+	<p:inputText id="Nom" value="#{eleveBean.el.nom}"></p:inputText>
+	
+		<p:outputLabel value="Prenoms" ></p:outputLabel>
+	<p:inputText value="#{eleveBean.el.prenom}"></p:inputText>
+	
+		<p:outputLabel value="Date de naissance" ></p:outputLabel>
+	<p:calendar value="#{eleveBean.el.dateNaissance}" pattern="MM/dd/yyyy"></p:calendar>
+	
+	<h:outputLabel for="classe" value="Classe"/>
+	<p:selectOneMenu id="classe" value="#{eleveBean.choixClass}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{eleveBean.myListClass}" var="tata" itemLabel="#{tata.nomClasse}" itemValue="#{tata}"></f:selectItems>
+	</p:selectOneMenu>
+	
+	</h:panelGrid>
+	<h:panelGrid style="margin-left:10%" columns="3">
+	<p:commandButton value="Valider" binding="#{eleveBean.submit}" action="#{eleveBean.inscrire}" update="form, table, messages"></p:commandButton>
+	<p:commandButton value="Modifier" binding="#{eleveBean.up}" action="#{eleveBean.modifier}" update="form , table, messages"></p:commandButton>
+	
+	
+	</h:panelGrid>
+	<p:messages id="messages" showDetail="true" closable="true">
+       
+    </p:messages>
+<div class="data">
+	<p:dataTable id="table" var="rara" value="#{eleveBean.tabEleve}" selectionMode="single" selection="#{eleveBean.eleveSelected}" rowKey="#{rara.numEleve}">
+	<f:facet name="header">LISTE DES ELEVES</f:facet>
+	<p:ajax event="rowSelect" listener="#{eleveBean.onChange}" update="form:eleveGrid" />
+	<p:column headerText="Matricule">#{rara.numEleve}</p:column>
+	<p:column headerText="NOM">#{rara.nom}</p:column>
+	<p:column headerText="Prenom">#{rara.prenom}</p:column>
+	<p:column headerText="Date de naissance">#{rara.dateNaissance}</p:column>
+	</p:dataTable>
+	</div>
+	</h:form>
+	</div>
+	
+				
+			</ui:define>
+	</ui:composition>
+
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+	
+			
+			<ui:define name="body">
+				<div class="logo">
+    <img src="images/classe.jpg" class="avatar" alt="" /> 
+    	   
+        <h1>Ajouter une classe</h1>
+	<h:form id="form">
+	<h:panelGrid columns="2" id="classGrid">	
+		<p:outputLabel for="code" value="code de la classe" ></p:outputLabel>
+	<p:inputText id="code" value="#{classBean.classrom.codeClasse}"></p:inputText>
+	
+		<p:outputLabel for="Nom" value="Nom de la classe" ></p:outputLabel>
+	<p:inputText id="Nom" value="#{classBean.classrom.nomClasse}"></p:inputText>
+	
+		<h:outputLabel for="prof" value="Professeur"/>
+	<p:selectOneMenu id="prof" value="#{classBean.choixProf}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{classBean.myListProf}" var="tata" itemLabel="#{tata.prenomProf}" itemValue="#{tata}"></f:selectItems>
+	</p:selectOneMenu>
+	</h:panelGrid>
+	
+   <h:panelGrid style="margin-top:30px" columns="3">
+	<p:commandButton value="Valider" binding="#{classBean.submit}" action="#{classBean.inscrire}" update="form"></p:commandButton>
+	<p:commandButton value="Annuler" binding="#{classBean.reset}" action="#{classBean.annuler}"></p:commandButton>
+    <p:commandButton value="Modifier" binding="#{classBean.up}" action="#{classBean.modifier}" update="form"></p:commandButton>
+	
+	</h:panelGrid>
+	<p:messages id="messages" showDetail="true" closable="true">
+       
+    </p:messages>
+	<div class="data">
+		<p:dataTable id="table" var="rara" value="#{classBean.tabClass}" selectionMode="single" selection="#{classBean.classSelected}" rowKey="#{rara.codeClasse}">
+	<f:facet name="header">LISTE DES ETUDIANTS</f:facet>
+	<p:ajax event="rowSelect" listener="#{classBean.onChange}" update="form:classGrid" />
+	<p:column headerText="Code de Classe" width="10%">#{rara.codeClasse}</p:column>
+	<p:column headerText="NOM" width="20%">#{rara.nomClasse}</p:column>
+	</p:dataTable>
+	</div>
+	</h:form>
+	</div>
+				
+			</ui:define>
+	</ui:composition>
+
+</html>
+
