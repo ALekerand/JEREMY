@@ -12,17 +12,15 @@
 	 -->
 	<ui:composition template="/PAGES/template_model.xhtml">
 			<ui:define name="body">
-				<form id="form">
-				<h:panelGrid columns="2" id="classGrid">
-		<h:outputLabel for="classe" value="Classe"/>
+				<h:form id="form">
+	<h:panelGrid columns="2" id="classGrid">
+	<h:outputLabel for="classe" value="Classe"/>
 	<p:selectOneMenu id="classe" value="#{listElevCBean.classSelected}" converter="#{entityConverter}">
 	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
 	<f:selectItems value="#{listElevCBean.allClasse}" var="tata" itemLabel="#{tata.nomClasse}" itemValue="#{tata}"></f:selectItems>
 		<p:ajax event="change" listener="#{listElevCBean.chargeListEleve}"  update="table"></p:ajax>
 	</p:selectOneMenu>
-	
-	 <h:commandButton value="Valider" action="#{listElevCBean.chargeListEleve}"></h:commandButton>
-   
+		<p:commandButton value="Valider" action="#{listElevCBean.chargeListEleve}"></p:commandButton>
 	</h:panelGrid>
 	<div class="data">
 		<p:dataTable id="table" var="rara" value="#{listElevCBean.allStudent}">
@@ -31,7 +29,7 @@
 	<p:column headerText="Prenom" width="50%">#{rara.prenom}</p:column>
 	</p:dataTable>
 	</div>
-				</form>
+				</h:form>
 			</ui:define>
 	</ui:composition>
 

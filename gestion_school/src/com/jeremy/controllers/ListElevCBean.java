@@ -30,7 +30,8 @@ public class ListElevCBean {
 	
 	public void chargeListEleve() {
 		
-	System.out.println("==== Je suis dans la méthode");
+		// Exécution de la requête afin de charger la liste concernée 
+		allStudent = requeteEleve.findStudentByClass(classSelected.getCodeClasse());
 	}
 	
 	
@@ -40,6 +41,7 @@ public class ListElevCBean {
 	public void setListClasse(Classe listClasse) {
 		this.listClasse = listClasse;
 	}
+	
 	public List getAllClasse() {
 		if(allClasse.isEmpty()) {
 			allClasse = getService().getObjects("Classe");
