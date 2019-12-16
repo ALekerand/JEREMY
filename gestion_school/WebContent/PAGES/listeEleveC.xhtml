@@ -20,7 +20,6 @@
 	<f:selectItems value="#{listElevCBean.allClasse}" var="tata" itemLabel="#{tata.nomClasse}" itemValue="#{tata}"></f:selectItems>
 		<p:ajax event="change" listener="#{listElevCBean.chargeListEleve}"  update="table"></p:ajax>
 	</p:selectOneMenu>
-		<p:commandButton value="Valider" action="#{listElevCBean.chargeListEleve}"></p:commandButton>
 	</h:panelGrid>
 	<div class="data">
 		<p:dataTable id="table" var="rara" value="#{listElevCBean.allStudent}">
