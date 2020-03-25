@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+	<h:panelGrid columns="2" id="classGrid">
+	<h:outputLabel for="classe" value="Classe"/>
+	<p:selectOneMenu id="classe" value="#{listProfCBean.profSelected}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{listProfCBean.allProf}" var="tata" itemLabel="#{tata.nomProf}" itemValue="#{tata}"></f:selectItems>
+		<p:ajax event="change" listener="#{listProfCBean.chargeListProf}"  update="table"></p:ajax>
+	</p:selectOneMenu>
+	</h:panelGrid>
+	<div class="data">
+		<p:dataTable id="table" var="rara" value="#{listProfCBean.allClasse}">
+	<f:facet name="header">LISTE DES CLASSES</f:facet>
+	<p:column headerText="Matricule de classe" width="30%">#{rara.codeClasse}</p:column>
+	<p:column headerText="Nom de la classe" width="40%">#{rara.nomClasse}</p:column>
+	
+	</p:dataTable>
+	</div>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>

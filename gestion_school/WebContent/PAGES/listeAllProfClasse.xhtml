@@ -4,6 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+      
 
 	<!-- 
 		Replace path to template, title, header and body
@@ -11,9 +12,18 @@
 	 -->
 	<ui:composition template="/PAGES/template_model.xhtml">
 			<ui:define name="body">
-				<form id="form">
-				 <p:commandButton value="Valider" action="#{listElevCBean.chargeListEleve}"></p:commandButton>
-				</form>
+				<h:form id="form">
+	
+	<div class="data">
+		<p:dataTable id="table" var="rara" value="#{listAllProfBean.allProf}">
+	<f:facet name="header">LISTE DES PROFESSEURS</f:facet>
+	<p:column headerText="Nom du Prof" width="30%">#{rara.nomProf}</p:column>
+	<p:column headerText="Prenom du Prof" width="30%">#{rara.prenomProf}</p:column>
+	<p:column headerText="Classe Enseignées" width="30%">#{rara.classe.nomClasse}</p:column>
+	
+	</p:dataTable>
+	</div>
+				</h:form>
 			</ui:define>
 	</ui:composition>
 

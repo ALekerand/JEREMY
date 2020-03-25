@@ -28,6 +28,8 @@ public class EnseignerBean {
 	private Matiere choixMat = new Matiere();
 	private Enseigner ens = new Enseigner();
 	
+	private List tabEns = new ArrayList<>();
+	
 	private List myListClass = new ArrayList<>();
 	private List myListProf = new ArrayList<>();
 	private List myListMat = new ArrayList<>();
@@ -164,5 +166,14 @@ public class EnseignerBean {
 
 	public void setMyListEns(List myListEns) {
 		this.myListEns = myListEns;
+	}
+
+	public List getTabEns() {
+		tabEns = service.getObjects("Enseigner");
+		return tabEns;
+	}
+
+	public void setTabEns(List tabEns) {
+		this.tabEns = tabEns;
 	}
 }

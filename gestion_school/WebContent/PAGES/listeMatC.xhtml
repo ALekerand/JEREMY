@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/PAGES/template_model.xhtml">
+			<ui:define name="body">
+				<h:form id="form">
+	<h:panelGrid columns="2" id="classGrid">
+	<h:outputLabel for="classe" value="Classe"/>
+	<p:selectOneMenu id="classe" value="#{listMatCBean.classeSelected}" converter="#{entityConverter}">
+	<f:selectItem  itemLabel="Selectionnez"  itemValue=""/>
+	<f:selectItems value="#{listMatCBean.allClasse}" var="tata" itemLabel="#{tata.nomClasse}" itemValue="#{tata}"></f:selectItems>
+		<p:ajax event="change" listener="#{listMatCBean.chargeListMat}"  update="table"></p:ajax>
+	</p:selectOneMenu>
+	</h:panelGrid>
+	<div class="data">
+		<p:dataTable id="table" var="rara" value="#{listMatCBean.allMat}">
+	<f:facet name="header">Liste des Matières enseignées</f:facet>
+	<p:column headerText="Matricule" width="15%">#{rara.professeur.numProf}</p:column>
+	<p:column headerText="Nom" width="30%">#{rara.professeur.nomProf}</p:column>
+	<p:column headerText="Prenom" width="30%">#{rara.professeur.prenomProf}</p:column>
+	<p:column headerText="Telephone" width="30%">#{rara.professeur.telProf}</p:column>
+	<p:column headerText="Matières enseignées" width="30%">#{rara.matiere.libelleMatiere}</p:column>
+	
+	</p:dataTable>
+	</div>
+				</h:form>
+			</ui:define>
+	</ui:composition>
+
+</html>
